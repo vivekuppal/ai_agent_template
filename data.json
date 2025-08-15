@@ -1,0 +1,12 @@
+{"message": {
+	"messageId": "1234567890", 
+	"attributes": {
+		"eventType": "OBJECT_FINALIZE", 
+		"bucketId": "lai_dmarc_report_test", 
+		"objectId": "yahoo.com!ceolounge.net!1755129600!1755215999.xml", 
+		"objectGeneration": "1733939393000000", 
+		"payloadFormat": "XML" 
+	},
+	"data": "" },
+	"subscription": "projects/lappuai-prod/subscriptions/sub-parser" 
+}
