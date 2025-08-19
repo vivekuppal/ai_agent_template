@@ -111,8 +111,8 @@ def _download_exact_generation(bucket_name: str, object_id: str, generation: Opt
         return blob.download_as_bytes()
 
 
-@app.get("/healthz")
-def healthz():
+@app.get("/health")
+def health():
     return {"status": "ok", "component": COMPONENT_NAME}
 
 

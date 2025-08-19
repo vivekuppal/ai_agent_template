@@ -40,3 +40,31 @@ OUTPUT_PREFIX=outputs/ai-scorer/
 
 REQUIRE_JWT=true and PUBSUB_ALLOWED_AUDIENCE=<your push endpoint URL> if you want in-app token verification (optional; Cloud Run can enforce it without this).
 ```
+
+
+# Steps for creating an AI Agent
+
+This set up assumes
+- We are creating an event based trigger for the AI agent
+- Event based trigger uses PUB SUB as the techincal implementation
+- The code is python based
+
+This set up creates
+- All necessary infrastructure required for the agent on GCP
+- Uses Pub sub
+- Assumes code is written in Python
+
+Run the following bat file
+```
+create-agent.bat
+```
+
+# Steps for removing the AI Agent created above
+
+Run the following bat file
+```
+teardown.bat
+```
+
+# Misc files
+smoke.json - Empty json file for testing the functionality
