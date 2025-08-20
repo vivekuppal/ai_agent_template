@@ -14,7 +14,9 @@ from .utils import verify_pubsub_jwt_if_required, json_dumps
 logger = logging.getLogger("uvicorn")
 logger.setLevel(logging.INFO)
 
-app = FastAPI(title="ai-agent")
+# TO DO: determine if we are copying the input file in the output
+# or if we are just processing the input file and writing the output.
+
 
 # Config via env
 COMPONENT_NAME = os.getenv("COMPONENT_NAME", "ai-component")
@@ -23,11 +25,16 @@ OBJECT_PREFIX = os.getenv("OBJECT_PREFIX", "")  # e.g. "reports/"
 OUTPUT_PREFIX = os.getenv("OUTPUT_PREFIX", f"outputs/{COMPONENT_NAME}/")
 READ_CHUNK_SIZE = int(os.getenv("READ_CHUNK_SIZE", "0"))  # 0 -> entire file
 
+
+app = FastAPI(title=COMPONENT_NAME)
+
 # Lazily created GCS client
 _storage_client: Optional[storage.Client] = None
 
 
 def get_storage() -> storage.Client:
+    """ Returns a GCS client, creating it if not already done.
+    """
     global _storage_client
     if _storage_client is None:
         _storage_client = storage.Client()
@@ -158,6 +165,7 @@ async def pubsub_push(request: Request):
 
     # 2) Process
     try:
+        # TO DO: Pass the content as filename instead of bytes
         result = await process_file(
             content=content_bytes,
             context={
